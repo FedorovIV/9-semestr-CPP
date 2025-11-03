@@ -29,7 +29,7 @@ public:
 
     // ----------------------------------------------------------------------------------------
 
-    auto& operator+=(Rational const& other)
+    auto &operator+=(Rational const &other)
     {
         auto lcm = std::lcm(m_den, other.m_den);
         m_num = m_num * (lcm / m_den) + other.m_num * (lcm / other.m_den);
@@ -40,14 +40,14 @@ public:
 
     // ----------------------------------------------------------------------------------------
 
-    auto& operator-=(Rational const& other)
+    auto &operator-=(Rational const &other)
     {
         return *this += Rational(-other.m_num, other.m_den);
     }
 
     // ----------------------------------------------------------------------------------------
 
-    auto& operator*=(Rational const& other)
+    auto &operator*=(Rational const &other)
     {
         m_num *= other.m_num;
         m_den *= other.m_den;
@@ -57,33 +57,51 @@ public:
 
     // ----------------------------------------------------------------------------------------
 
-    auto& operator/=(Rational const& other)
+    auto &operator/=(Rational const &other)
     {
         return *this *= Rational(other.m_den, other.m_num);
     }
 
     // ----------------------------------------------------------------------------------------
 
-    auto const operator++(int) { auto x = *this; *this += 1; return x; }
-    auto const operator--(int) { auto x = *this; *this -= 1; return x; }
+    auto const operator++(int)
+    {
+        auto x = *this;
+        *this += 1;
+        return x;
+    }
+    auto const operator--(int)
+    {
+        auto x = *this;
+        *this -= 1;
+        return x;
+    }
 
-    auto& operator++() { *this += 1; return *this; }
-    auto& operator--() { *this -= 1; return *this; }
+    auto &operator++()
+    {
+        *this += 1;
+        return *this;
+    }
+    auto &operator--()
+    {
+        *this -= 1;
+        return *this;
+    }
 
     // ----------------------------------------------------------------------------------------
 
-    friend auto operator+(Rational lhs, Rational const& rhs) { return lhs += rhs; }
-    friend auto operator-(Rational lhs, Rational const& rhs) { return lhs -= rhs; }
-    friend auto operator*(Rational lhs, Rational const& rhs) { return lhs *= rhs; }
-    friend auto operator/(Rational lhs, Rational const& rhs) { return lhs /= rhs; }
+    friend auto operator+(Rational lhs, Rational const &rhs) { return lhs += rhs; }
+    friend auto operator-(Rational lhs, Rational const &rhs) { return lhs -= rhs; }
+    friend auto operator*(Rational lhs, Rational const &rhs) { return lhs *= rhs; }
+    friend auto operator/(Rational lhs, Rational const &rhs) { return lhs /= rhs; }
 
     // ----------------------------------------------------------------------------------------
     // 💡 Главное отличие задачи 03.10 — используем <=> вместо 6 операторов
     // ----------------------------------------------------------------------------------------
 
-    friend std::strong_ordering operator<=>(Rational const& lhs, Rational const& rhs)
+    friend std::strong_ordering operator<=>(Rational const &lhs, Rational const &rhs)
     {
-        auto left  = static_cast<long long>(lhs.m_num) * rhs.m_den;
+        auto left = static_cast<long long>(lhs.m_num) * rhs.m_den;
         auto right = static_cast<long long>(rhs.m_num) * lhs.m_den;
 
         if (left < right)
@@ -94,14 +112,14 @@ public:
     }
 
     // Равенство теперь определяется через <=> (одно условие)
-    friend bool operator==(Rational const& lhs, Rational const& rhs)
+    friend bool operator==(Rational const &lhs, Rational const &rhs)
     {
         return (lhs <=> rhs) == std::strong_ordering::equal;
     }
 
     // ----------------------------------------------------------------------------------------
 
-    friend std::istream& operator>>(std::istream& stream, Rational& rational)
+    friend std::istream &operator>>(std::istream &stream, Rational &rational)
     {
         char slash;
         stream >> rational.m_num >> slash >> rational.m_den;
@@ -109,7 +127,7 @@ public:
         return stream;
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, Rational const& rational)
+    friend std::ostream &operator<<(std::ostream &stream, Rational const &rational)
     {
         return stream << rational.m_num << '/' << rational.m_den;
     }
@@ -160,8 +178,11 @@ int main()
     assert((x * y) == Rational(2, 1));
     assert((x / y) == Rational(1, 2));
 
-    assert((x <=> y) == std::strong_ordering::equal);
-    assert((x == y));
+    assert((x <=> y) == std::strong_ordering::less);
+
+    Rational x2(1, 2);
+    Rational y2(2, 4);
+    assert((x2 == y2));
 
     std::stringstream stream_1("1/2");
     std::stringstream stream_2;
