@@ -117,14 +117,41 @@ public:
         Node *slow = m_head;
         Node *fast = m_head;
 
-        while (fast && fast->next)
+        while (fast && fast->next && fast->next->next)
         {
             slow = slow->next;
             fast = fast->next->next;
         }
+
         return slow->value;
     }
+
+    int front() const
+    {
+        if (empty())
+            throw std::runtime_error("List is empty");
+        return m_head->value;
+    }
 };
+
+void test_reverse()
+{
+    List list;
+    for (int i = 1; i <= 5; ++i)
+        list.push_back(i);
+
+    List reversed;
+    while (!list.empty())
+    {
+        int val = list.front(); // теперь берём первый элемент
+        list.pop_front();
+        reversed.push_front(val);
+    }
+
+    std::cout << "Reversed list: ";
+    reversed.show();
+    std::cout << '\n';
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -146,7 +173,6 @@ int main()
     std::cout << "List contents: ";
     list.show();
     std::cout << '\n';
-    std::cout << list.middle();
 
     // Проверка среднего элемента
     assert(list.middle() == 3);
@@ -165,6 +191,8 @@ int main()
 
     // Освобождение памяти проверится деструктором
     std::cout << "All tests passed!\n";
+
+    test_reverse();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
