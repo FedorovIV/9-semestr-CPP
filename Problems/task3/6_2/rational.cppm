@@ -9,11 +9,11 @@ Rational::Rational(int n, int d) : num_(n), den_(d) {
     simplify();
 }
 
-int Rational::num() const {
+int Rational::num() const noexcept {
     return num_;
 }
 
-int Rational::den() const {
+int Rational::den() const noexcept {
     return den_;
 }
 
@@ -40,6 +40,7 @@ void Rational::simplify() {
     if (den_ == 0) {
         throw std::invalid_argument("denominator cannot be zero");
     }
+
     int common = std::gcd(num_, den_);
     num_ /= common;
     den_ /= common;

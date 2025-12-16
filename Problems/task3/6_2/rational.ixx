@@ -4,12 +4,13 @@ import <numeric>;
 import <stdexcept>;
 
 export namespace math {
+
 class Rational {
 public:
     Rational(int n = 0, int d = 1);
 
-    int num() const;
-    int den() const;
+    int num() const noexcept;
+    int den() const noexcept;
 
     Rational add(const Rational& other) const;
     Rational sub(const Rational& other) const;
@@ -22,4 +23,5 @@ private:
 
     void simplify();
 };
+
 }  // namespace math

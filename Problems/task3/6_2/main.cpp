@@ -6,7 +6,7 @@ import rational;
 using math::Rational;
 
 int main() {
-    // Basic arithmetic checks.
+    // Базовые проверки арифметики.
     Rational r1(1, 2);
     Rational r2(1, 3);
 
@@ -22,7 +22,7 @@ int main() {
     Rational quot = r1.div(r2);
     assert(quot.num() == 3 && quot.den() == 2);
 
-    // Normalization checks.
+    // Нормализация знака и сокращение.
     Rational normalized(-2, -4);
     assert(normalized.num() == 1 && normalized.den() == 2);
 
@@ -31,7 +31,7 @@ int main() {
 
     std::cout << "06.02: All tests passed.\n";
 
-    // Demo output.
+    // Демонстрационный пример.
     Rational r3(5, 6);
     Rational r4(7, 8);
     Rational r5 = r3.mul(r4);
