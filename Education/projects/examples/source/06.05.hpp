@@ -1,8 +1,8 @@
 //////////////////////////////////////
 
-#ifndef PROJECT_HEADER_HPP
+#ifndef HEADER_06_05
 
-#define PROJECT_HEADER_HPP
+#define HEADER_06_05
 
 //////////////////////////////////////
 
@@ -23,12 +23,12 @@ void test_v2();
 // void test_v3() // error
 // { 
 //     std::print("test_v3\n");
-// } 
+// }
 
 //////////////////////////////////////
 
 inline void test_v4()
-{ 
+{
     std::print("test_v4\n");
 }
 

@@ -1,5 +1,9 @@
 ///////////////////////////////////////////////////////////////////////
 
+// support : github.com/tdlib/td/blob/master/example/cpp/td_example.cpp
+
+///////////////////////////////////////////////////////////////////////
+
 #include <utility>
 
 ///////////////////////////////////////////////////////////////////////
@@ -14,9 +18,9 @@ template < typename ... Bs > class Router_v1 : public Bs ...
 {
 public :
 
-    template < typename ... Ts > Router_v1(int x, Ts && ... ys) 
+    template < typename ... Ts > Router_v1(int x, Ts && ... xs) 
     : 
-        Bs(std::forward < Ts > (ys))..., m_x(x)
+        Bs(std::forward < Ts > (xs))..., m_x(x)
     {}
 
 private :
@@ -38,9 +42,9 @@ template < template < typename T > typename ... Bs > class Router_v2
 {
 public :
 
-    template < typename ... Ts > Router_v2(int x, Ts && ... ys) 
+    template < typename ... Ts > Router_v2(int x, Ts && ... xs) 
     : 
-        Bs < Router_v2 > (std::forward < Ts > (ys))..., m_x(x)
+        Bs < Router_v2 > (std::forward < Ts > (xs))..., m_x(x)
     {}
 
 private :
